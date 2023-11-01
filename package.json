@@ -1,17 +1,15 @@
 {
-  "name": "tsc-backend",
+  "name": "tsc-android",
   "version": "1.0.0",
-  "description": "",
+  "description": "membuat CRUD dengan node js",
   "main": "app.js",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon app.js"
   },
-  "author": "",
+  "author": "Hansen Vernandez",
   "license": "ISC",
   "dependencies": {
-    "body-parser": "^1.20.2",
-    "express": "^4.18.2",
     "nodemon": "^3.0.1"
   }
 }
