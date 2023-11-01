@@ -81,31 +81,24 @@ const requestListener = (req, res) => {
         });
     }
 
-    if(method == 'DELETE'){
-        switch('/deleteBook'){
-            case 'libraryData':
-                const index = data.findIndex((data) => {
-                    data.index == params;
-                });
-
-                data.splice(index, 1);
-                if(index < 0){
-                    res.statusCode = 404;
-                    return res.end(
-                        JSON.stringify({
-                            message: 'data tidak ditemukan',
-                        })
-                    );
-                }else{
-                    res.statusCode = 200;
-                    return res.end(
-                        JSON.stringify({
-                            message: 'data berhasil dihapus',
-                        })
-                    )
-                }
+    if (method === 'DELETE' && req.url.startsWith('/deleteBook/')) {
+        const index = req.url.split('/').pop(); // Ambil indeks buku dari URL
+        const bookIndex = parseInt(index, 10); // Konversi indeks ke angka
+    
+        if (isNaN(bookIndex) || bookIndex < 0 || bookIndex >= libraryData.length) {
+            res.statusCode = 404;
+            return res.end(JSON.stringify({
+                message: 'Data tidak ditemukan',
+            }));
+        } else {
+            // Hapus data buku berdasarkan indeks
+            libraryData.splice(bookIndex, 1);
+            res.statusCode = 200;
+            return res.end(JSON.stringify({
+                message: 'Data berhasil dihapus',
+            }));
         }
-    } 
+    }        
 };
 
 const app = http.createServer(requestListener);
