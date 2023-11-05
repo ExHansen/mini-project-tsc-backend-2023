@@ -82,8 +82,8 @@ const requestListener = (req, res) => {
     }
 
     if (method === 'DELETE' && req.url.startsWith('/deleteBook/')) {
-        const index = req.url.split('/').pop(); // Ambil indeks buku dari URL
-        const bookIndex = parseInt(index, 10); // Konversi indeks ke angka
+        const index = req.url.split('/').pop(); 
+        const bookIndex = parseInt(index, 10); 
     
         if (isNaN(bookIndex) || bookIndex < 0 || bookIndex >= libraryData.length) {
             res.statusCode = 404;
@@ -91,7 +91,6 @@ const requestListener = (req, res) => {
                 message: 'Data tidak ditemukan',
             }));
         } else {
-            // Hapus data buku berdasarkan indeks
             libraryData.splice(bookIndex, 1);
             res.statusCode = 200;
             return res.end(JSON.stringify({
